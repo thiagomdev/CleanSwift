@@ -11,10 +11,12 @@ final class MainWorkerMock: MainWorking {
     
     private(set) var getCalled: Bool = false
     private(set) var getCount: Int = 0
-
+    private(set) var expectedStringCep: String?
+    
     func get(cep: String) async throws -> Cep? {
         getCalled = true
         getCount += 1
+        expectedStringCep = cep
         return expectedCep
     }
 }

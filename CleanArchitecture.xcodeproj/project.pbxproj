@@ -23,6 +23,7 @@
 		AA25296A2DE2322300AD365B /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529692DE2321E00AD365B /* Fixture.swift */; };
 		AA25296C2DE2325100AD365B /* MainWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25296B2DE2324F00AD365B /* MainWorkerMock.swift */; };
 		AA2529722DE2522000AD365B /* MainPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529712DE2522000AD365B /* MainPresenterTests.swift */; };
+		AA2529752DE266CD00AD365B /* MainWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529742DE266CD00AD365B /* MainWorkerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		AA2529692DE2321E00AD365B /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
 		AA25296B2DE2324F00AD365B /* MainWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorkerMock.swift; sourceTree = "<group>"; };
 		AA2529712DE2522000AD365B /* MainPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterTests.swift; sourceTree = "<group>"; };
+		AA2529742DE266CD00AD365B /* MainWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorkerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2529632DE231C400AD365B /* Helpers */,
+				AA2529732DE266B600AD365B /* Worker */,
 				AA2529602DE2221A00AD365B /* Presentation */,
 			);
 			path = Main;
@@ -290,6 +293,14 @@
 				AA2529692DE2321E00AD365B /* Fixture.swift */,
 			);
 			path = Fixture;
+			sourceTree = "<group>";
+		};
+		AA2529732DE266B600AD365B /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				AA2529742DE266CD00AD365B /* MainWorkerTests.swift */,
+			);
+			path = Worker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +426,7 @@
 			files = (
 				AA25296C2DE2325100AD365B /* MainWorkerMock.swift in Sources */,
 				AA2529652DE231D200AD365B /* MainPresenterSpy.swift in Sources */,
+				AA2529752DE266CD00AD365B /* MainWorkerTests.swift in Sources */,
 				AA2529722DE2522000AD365B /* MainPresenterTests.swift in Sources */,
 				AA2529622DE2223600AD365B /* MainInteractorTests.swift in Sources */,
 				AA25296A2DE2322300AD365B /* Fixture.swift in Sources */,
