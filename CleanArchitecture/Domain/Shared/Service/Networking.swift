@@ -14,7 +14,7 @@ protocol Networking {
 final class Network {
     private let session: URLSession
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession) {
         self.session = session
     }
 }
