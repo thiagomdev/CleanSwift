@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainViewControllerDisplayableLogic: AnyObject {
-    func displayCepData(_ cep: CepRequestModel.ViewModel) async throws
+    func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws
 }
 
 final class MainViewController: UIViewController {
@@ -66,10 +66,10 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MainViewControllerDisplayableLogic {
-    func displayCepData(_ cep: CepRequestModel.ViewModel) async throws {
+    func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws {
         await MainActor.run {
             // UPDATE UI LAYER
-            print(cep)
+            print(viewModel)
         }
     }
 }
