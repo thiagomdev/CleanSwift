@@ -52,8 +52,8 @@ final class NetworkTests {
         }
     }
     
-    @Test("Fetch CEP com diferentes códigos de status HTTP")
-    func fetchCepDifferentStatusCodes() async throws {
+    @Test
+    func fetch_cep_different_status_codes() async throws {
         let (sut, mock) = makeSut()
         
         // ViaCEP retorna esse JSON quando o CEP não existe
