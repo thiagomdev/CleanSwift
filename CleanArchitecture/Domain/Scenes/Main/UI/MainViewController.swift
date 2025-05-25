@@ -60,8 +60,8 @@ final class MainViewController: UIViewController {
     }
     
     private func requestCepData(_ cep: String) async throws {
-        let resquest = CepRequestModel.Request(cep: cep)
-        try await interactor.load(data: resquest.cep)
+        let request = CepRequestModel.Request(cep: cep)
+        try await interactor.load(data: request.cep)
     }
 }
 
