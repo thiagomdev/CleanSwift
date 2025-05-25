@@ -26,13 +26,58 @@ final class MainViewController: UIViewController {
     
     public lazy var searchCepButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Buscar Cep", for: .normal)
+        button.setTitle("Buscar", for: .normal)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = 8
         button.accessibilityIdentifier = "searchCepButton"
         button.addTarget(self, action: #selector(searchCep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private lazy var stackViewContainer: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.spacing = 12
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private lazy var logradouroLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var estadoLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var bairro: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var regiao: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     init(interactor: MainInteracting) {
@@ -68,8 +113,10 @@ final class MainViewController: UIViewController {
 extension MainViewController: MainViewControllerDisplayableLogic {
     func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws {
         await MainActor.run {
-            // UPDATE UI LAYER
-            print(viewModel)
+            logradouroLabel.text = viewModel.logradouro
+            estadoLabel.text = viewModel.estado
+            bairro.text = viewModel.bairro
+            regiao.text = viewModel.regiao
         }
     }
 }
@@ -78,23 +125,32 @@ extension MainViewController {
     private func buildViews() {
         view.addSubview(inputedCepTextField)
         view.addSubview(searchCepButton)
+        view.addSubview(stackViewContainer)
+        stackViewContainer.addArrangedSubview(estadoLabel)
+        stackViewContainer.addArrangedSubview(logradouroLabel)
+        stackViewContainer.addArrangedSubview(bairro)
+        stackViewContainer.addArrangedSubview(regiao)
     }
     
     private func pin() {
         NSLayoutConstraint.activate([
-            inputedCepTextField.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1),
+            inputedCepTextField.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.5),
             inputedCepTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: inputedCepTextField.trailingAnchor, multiplier: 1),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: inputedCepTextField.trailingAnchor, multiplier: 1),
             inputedCepTextField.heightAnchor.constraint(equalToConstant: 80),
             
             searchCepButton.topAnchor.constraint(equalToSystemSpacingBelow: inputedCepTextField.bottomAnchor, multiplier: 1),
             searchCepButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: searchCepButton.trailingAnchor, multiplier: 1),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: searchCepButton.trailingAnchor, multiplier: 1),
             searchCepButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            stackViewContainer.topAnchor.constraint(equalToSystemSpacingBelow: searchCepButton.bottomAnchor, multiplier: 3),
+            stackViewContainer.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: stackViewContainer.trailingAnchor, multiplier: 1),
         ])
     }
     
     private func extraSetup() {
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemBackground
     }
 }
