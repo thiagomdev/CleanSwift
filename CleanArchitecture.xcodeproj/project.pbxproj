@@ -24,6 +24,8 @@
 		AA25296C2DE2325100AD365B /* MainWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25296B2DE2324F00AD365B /* MainWorkerMock.swift */; };
 		AA2529722DE2522000AD365B /* MainPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529712DE2522000AD365B /* MainPresenterTests.swift */; };
 		AA2529752DE266CD00AD365B /* MainWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529742DE266CD00AD365B /* MainWorkerTests.swift */; };
+		AA25297A2DE2704A00AD365B /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2529792DE2704A00AD365B /* NetworkTests.swift */; };
+		AAF43CB62DE2C1670014D6E9 /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF43CB52DE2C1660014D6E9 /* NetworkMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		AA25296B2DE2324F00AD365B /* MainWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorkerMock.swift; sourceTree = "<group>"; };
 		AA2529712DE2522000AD365B /* MainPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterTests.swift; sourceTree = "<group>"; };
 		AA2529742DE266CD00AD365B /* MainWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorkerTests.swift; sourceTree = "<group>"; };
+		AA2529792DE2704A00AD365B /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		AAF43CB52DE2C1660014D6E9 /* NetworkMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,7 @@
 		AA25295E2DE2220F00AD365B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				AA2529772DE2702B00AD365B /* Shared */,
 				AA25295F2DE2221400AD365B /* Main */,
 			);
 			path = Scenes;
@@ -245,6 +250,7 @@
 		AA25295F2DE2221400AD365B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				AA2529762DE2701B00AD365B /* New Group */,
 				AA2529632DE231C400AD365B /* Helpers */,
 				AA2529732DE266B600AD365B /* Worker */,
 				AA2529602DE2221A00AD365B /* Presentation */,
@@ -301,6 +307,38 @@
 				AA2529742DE266CD00AD365B /* MainWorkerTests.swift */,
 			);
 			path = Worker;
+			sourceTree = "<group>";
+		};
+		AA2529762DE2701B00AD365B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		AA2529772DE2702B00AD365B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AAF43CB42DE2C15D0014D6E9 /* Helpers */,
+				AA2529782DE2703400AD365B /* Service */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AA2529782DE2703400AD365B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AA2529792DE2704A00AD365B /* NetworkTests.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		AAF43CB42DE2C15D0014D6E9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AAF43CB52DE2C1660014D6E9 /* NetworkMock.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +462,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF43CB62DE2C1670014D6E9 /* NetworkMock.swift in Sources */,
+				AA25297A2DE2704A00AD365B /* NetworkTests.swift in Sources */,
 				AA25296C2DE2325100AD365B /* MainWorkerMock.swift in Sources */,
 				AA2529652DE231D200AD365B /* MainPresenterSpy.swift in Sources */,
 				AA2529752DE266CD00AD365B /* MainWorkerTests.swift in Sources */,

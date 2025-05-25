@@ -9,7 +9,8 @@ import UIKit
 
 enum MainFactory {
     static func make() -> UIViewController {
-        let networking = Network(session: .shared)
+        let session = URLSession.shared
+        let networking = Network(session: session)
         let worker = MainWorker(networking: networking)
         let presenter = MainPresenter()
         let interactor = MainInteractor(worker: worker, presenter: presenter)

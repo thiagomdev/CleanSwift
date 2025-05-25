@@ -7,24 +7,28 @@
 
 import Foundation
 
+protocol URLSessionProtocol {
+    func data(from url: URL) async throws -> (Data, URLResponse)
+}
+
+extension URLSession: URLSessionProtocol {}
+
 protocol Networking {
     func fetchCep(_ data: String) async throws -> Cep?
 }
 
 final class Network {
-    private let session: URLSession
+    private let session: URLSessionProtocol
     
-    init(session: URLSession) {
+    init(session: URLSessionProtocol) {
         self.session = session
     }
 }
 
 extension Network: Networking {
     func fetchCep(_ data: String) async throws -> Cep? {
-        if let endpoint = URL(string: "https://viacep.com.br/ws/\(data)/json/") {
-            let (data, _) = try await session.data(from: endpoint)
-            return try JSONDecoder().decode(Cep.self, from: data)
-        }
-        return nil
+        guard let endpoint = URL(string: "https://viacep.com.br/ws/\(data)/json/") else { return nil }
+        let (data, _) = try await session.data(from: endpoint)
+        return try JSONDecoder().decode(Cep.self, from: data)
     }
 }
