@@ -8,9 +8,12 @@
 import Testing
 @testable import CleanArchitecture
 
-@Suite("MainPresenter", .serialized)
+@Suite("MainWorker", .serialized)
 final class MainWorkerTests {
-
+    
+    private(set) var sutTracker: MemoryLeakTracker<MainWorker>?
+    private(set) var networkingMockTracker: MemoryLeakTracker<NetworkingMock>?
+    
     @Test(arguments: [("01150011")])
     func get(cep: String) async throws {
         let (sut, networkingMock) = makeSut()
@@ -27,27 +30,22 @@ final class MainWorkerTests {
         #expect(networkingMock.expectedCep == expectedCep)
         #expect(networkingMock.expectedStringCep == cep)
     }
-}
-
-final class NetworkingMock: Networking {
- 
-    var expectedCep: Cep?
-    private(set) var getCalled: Bool = false
-    private(set) var getCount: Int = 0
-    private(set) var expectedStringCep: String?
     
-    func fetchCep(_ data: String) async throws -> Cep? {
-        getCalled = true
-        getCount += 1
-        expectedStringCep = data
-        return expectedCep
+    deinit {
+        sutTracker?.verify()
+        networkingMockTracker?.verify()
     }
 }
 
 extension MainWorkerTests {
-    private func makeSut() -> (sut: MainWorker, networkingMock: NetworkingMock) {
+    private func makeSut(file: String = #file, line: Int = #line, column: Int = #column) -> (sut: MainWorker, networkingMock: NetworkingMock) {
         let networkingMock = NetworkingMock()
         let sut = MainWorker(networking: networkingMock)
+        
+        let sourceLocation = SourceLocation(fileID: #fileID, filePath: file, line: line, column: column)
+        sutTracker = .init(instance: sut, sourceLocation: sourceLocation)
+        networkingMockTracker = .init(instance: networkingMock, sourceLocation: sourceLocation)
+        
         return (sut, networkingMock)
     }
 }

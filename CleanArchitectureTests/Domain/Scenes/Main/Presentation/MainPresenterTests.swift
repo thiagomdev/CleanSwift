@@ -10,7 +10,10 @@ import Testing
 
 @Suite("MainPresenter", .serialized)
 final class MainPresenterTests {
-
+    
+    private(set) var sutTracker: MemoryLeakTracker<MainPresenter>?
+    private(set) var viewControllerSpyTracker: MemoryLeakTracker<MainViewControllerSpy>?
+    
     @Test(arguments: [("01150011")])
     func present(cep: String) async throws {
         let (sut, viewControllerSpy) = makeSut()
@@ -24,26 +27,23 @@ final class MainPresenterTests {
         #expect(viewControllerSpy.displayCepDataCount == 1)
         #expect(viewControllerSpy.expectedDisplayCepData?.cep.cep == cep)
     }
-}
-
-extension MainPresenterTests {
-    private func makeSut() -> (sut: MainPresenter, viewControllerSpy: MainViewControllerSpy) {
-        let viewControllerSpy = MainViewControllerSpy()
-        let sut = MainPresenter()
-        sut.viewController = viewControllerSpy
-        return (sut, viewControllerSpy)
+    
+    deinit {
+        sutTracker?.verify()
+        viewControllerSpyTracker?.verify()
     }
 }
 
-final class MainViewControllerSpy: MainViewControllerDisplayableLogic {
-    var expectedDisplayCepData: CepRequestModel.ViewModel?
-    
-    private(set) var displayCepDataCalled: Bool = false
-    private(set) var displayCepDataCount: Int = 0
-    
-    func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws {
-        displayCepDataCalled = true
-        displayCepDataCount += 1
-        expectedDisplayCepData = viewModel
+extension MainPresenterTests {
+    private func makeSut(file: String = #file, line: Int = #line, column: Int = #column) -> (sut: MainPresenter, viewControllerSpy: MainViewControllerSpy) {
+        let viewControllerSpy = MainViewControllerSpy()
+        let sut = MainPresenter()
+        sut.viewController = viewControllerSpy
+        
+        let sourceLocation = SourceLocation(fileID: #fileID, filePath: file, line: line, column: column)
+        sutTracker = .init(instance: sut, sourceLocation: sourceLocation)
+        viewControllerSpyTracker = .init(instance: viewControllerSpy, sourceLocation: sourceLocation)
+        
+        return (sut, viewControllerSpy)
     }
 }

@@ -9,8 +9,11 @@ import Testing
 import Foundation
 @testable import CleanArchitecture
 
-@Suite("NetworkTest", .serialized)
+@Suite("Network", .serialized)
 final class NetworkTests {
+    
+    private(set) var sutTracker: MemoryLeakTracker<Network>?
+    private(set) var mockTracker: MemoryLeakTracker<NetworkMock>?
     
     @Test(arguments: [("00000000")])
     func fetch(cep: String) async throws {
@@ -55,8 +58,6 @@ final class NetworkTests {
     @Test
     func fetch_cep_different_status_codes() async throws {
         let (sut, mock) = makeSut()
-        
-        // ViaCEP retorna esse JSON quando o CEP não existe
         let errorData = """
            {
                "erro": "true"
@@ -71,17 +72,26 @@ final class NetworkTests {
             headerFields: nil
         )
         
-        // When & Then - Este teste deve falhar no decode porque o modelo Cep não tem campo "erro"
         await #expect(throws: DecodingError.self) {
             try await sut.fetchCep("00000000")
         }
     }
+    
+    deinit {
+        sutTracker?.verify()
+        mockTracker?.verify()
+    }
 }
 
 extension NetworkTests {
-    private func makeSut() -> (sut: Network, mock: NetworkMock) {
+    private func makeSut(file: String = #file, line: Int = #line, column: Int = #column) -> (sut: Network, mock: NetworkMock) {
         let mock = NetworkMock()
         let sut = Network(session: mock)
+        
+        let sourceLocation = SourceLocation(fileID: #fileID, filePath: file, line: line, column: column)
+        sutTracker = .init(instance: sut, sourceLocation: sourceLocation)
+        mockTracker = .init(instance: mock, sourceLocation: sourceLocation)
+        
         return (sut, mock)
     }
 }
