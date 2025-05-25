@@ -29,6 +29,7 @@
 		AAF43CBA2DE2C5AE0014D6E9 /* MemoryLeakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF43CB92DE2C5AC0014D6E9 /* MemoryLeakTracker.swift */; };
 		AAF43CBC2DE2C7830014D6E9 /* NetworkingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF43CBB2DE2C7820014D6E9 /* NetworkingMock.swift */; };
 		AAF43CBE2DE2C9530014D6E9 /* MainViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF43CBD2DE2C9500014D6E9 /* MainViewControllerSpy.swift */; };
+		AAF43CC12DE2CAE30014D6E9 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF43CC02DE2CAE30014D6E9 /* MainViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		AAF43CB92DE2C5AC0014D6E9 /* MemoryLeakTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTracker.swift; sourceTree = "<group>"; };
 		AAF43CBB2DE2C7820014D6E9 /* NetworkingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingMock.swift; sourceTree = "<group>"; };
 		AAF43CBD2DE2C9500014D6E9 /* MainViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerSpy.swift; sourceTree = "<group>"; };
+		AAF43CC02DE2CAE30014D6E9 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				AA2529632DE231C400AD365B /* Helpers */,
 				AA2529732DE266B600AD365B /* Worker */,
 				AA2529602DE2221A00AD365B /* Presentation */,
+				AAF43CBF2DE2CAAC0014D6E9 /* UI */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -356,6 +359,14 @@
 				AAF43CB92DE2C5AC0014D6E9 /* MemoryLeakTracker.swift */,
 			);
 			path = MemoryLeakTracker;
+			sourceTree = "<group>";
+		};
+		AAF43CBF2DE2CAAC0014D6E9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AAF43CC02DE2CAE30014D6E9 /* MainViewControllerTests.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,6 +501,7 @@
 				AAF43CBA2DE2C5AE0014D6E9 /* MemoryLeakTracker.swift in Sources */,
 				AA2529622DE2223600AD365B /* MainInteractorTests.swift in Sources */,
 				AA25296A2DE2322300AD365B /* Fixture.swift in Sources */,
+				AAF43CC12DE2CAE30014D6E9 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
