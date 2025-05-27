@@ -22,6 +22,18 @@ final class MainViewControllerTests {
         #expect(interactorySpy.loadCount == 0)
         #expect(interactorySpy.expectedData != cep)
     }
+    
+    
+    @Test(arguments: [("01150011")])
+    func request_cep_data(cep: String) async throws {
+        let (sut, interactorySpy) = makeSut()
+        
+        try await sut.requestCepData(cep)
+        
+        #expect(interactorySpy.loadCalled == true)
+        #expect(interactorySpy.loadCount == 1)
+        #expect(interactorySpy.expectedData == cep)
+    }
 }
 
 extension MainViewControllerTests {

@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainViewControllerDisplayableLogic: AnyObject {
     func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws
+    func requestCepData(_ cep: String) async throws
 }
 
 final class MainViewController: UIViewController {
@@ -103,14 +104,14 @@ final class MainViewController: UIViewController {
             inputedCepTextField.text = ""
         }
     }
-    
-    private func requestCepData(_ cep: String) async throws {
-        let request = CepRequestModel.Request(cep: cep)
-        try await interactor.load(data: request.cep)
-    }
 }
 
 extension MainViewController: MainViewControllerDisplayableLogic {
+    func requestCepData(_ cep: String) async throws {
+        let request = CepRequestModel.Request(cep: cep)
+        try await interactor.load(data: request.cep)
+    }
+    
     func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws {
         await MainActor.run {
             logradouroLabel.text = viewModel.logradouro

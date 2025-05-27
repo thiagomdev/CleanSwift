@@ -184,8 +184,8 @@
 		AA2529472DE1DDF600AD365B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				AA2529592DE1E5D300AD365B /* MainPresenter.swift */,
 				AA2529572DE1E50700AD365B /* MainInteractor.swift */,
+				AA2529592DE1E5D300AD365B /* MainPresenter.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
