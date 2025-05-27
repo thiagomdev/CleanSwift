@@ -206,12 +206,12 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		AA25294D2DE1DE8600AD365B /* Service */ = {
+		AA25294D2DE1DE8600AD365B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				AA2529552DE1E12D00AD365B /* Networking.swift */,
 			);
-			path = Service;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		AA25294E2DE1DE9000AD365B /* Worker */ = {
@@ -233,7 +233,7 @@
 		AA2529542DE1E11100AD365B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				AA25294D2DE1DE8600AD365B /* Service */,
+				AA25294D2DE1DE8600AD365B /* Networking */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
