@@ -339,8 +339,8 @@
 		AAF43CB42DE2C15D0014D6E9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AAF43CB82DE2C59E0014D6E9 /* MemoryLeakTracker */,
 				AAF43CB72DE2C5930014D6E9 /* Mock */,
+				AAF43CB82DE2C59E0014D6E9 /* MemoryLeakTracker */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
