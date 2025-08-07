@@ -14,7 +14,7 @@ protocol URLSessionProtocol {
 extension URLSession: URLSessionProtocol {}
 
 protocol Networking {
-    func fetchCep(_ data: String) async throws -> Cep?
+    func fetchCep(_ cep: String) async throws -> Cep?
 }
 
 final class Network {
@@ -26,8 +26,8 @@ final class Network {
 }
 
 extension Network: Networking {
-    func fetchCep(_ data: String) async throws -> Cep? {
-        guard let endpoint = URL(string: "https://viacep.com.br/ws/\(data)/json/") else { return nil }
+    func fetchCep(_ cep: String) async throws -> Cep? {
+        guard let endpoint = URL(string: "https://viacep.com.br/ws/\(cep)/json/") else { return nil }
         let (data, _) = try await session.data(from: endpoint)
         return try JSONDecoder().decode(Cep.self, from: data)
     }

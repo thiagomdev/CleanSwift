@@ -19,20 +19,24 @@ enum CepRequestModel {
     struct ViewModel {
         let cep: Cep
     
-        var logradouro: String {
-            "Logradouro: \(cep.logradouro)"
+        enum InfoCep {
+            case logradouro
+            case estado
+            case bairro
+            case regiao
         }
         
-        var estado: String {
-            "Estado: \(cep.estado)"
-        }
-        
-        var bairro: String {
-            "Bairro: \(cep.bairro)"
-        }
-        
-        var regiao: String {
-            "Região: \(cep.regiao)"
+        func perform(formatted string: InfoCep) -> String {
+            switch string {
+            case .logradouro:
+                "Logradouro: \(cep.logradouro)"
+            case .estado:
+                "Estado: \(cep.estado)"
+            case .bairro:
+                "Bairro: \(cep.bairro)"
+            case .regiao:
+                "Região: \(cep.regiao)"
+            }
         }
     }
 }
