@@ -13,6 +13,7 @@ protocol MainViewControllerDisplayableLogic: AnyObject {
 }
 
 final class MainViewController: UIViewController {
+    private var cancellable: Task<Void, Error>?
     private let interactor: MainInteracting
     
     public lazy var inputedCepTextField: UITextField = {
@@ -100,7 +101,18 @@ final class MainViewController: UIViewController {
     @objc
     private func searchCep() {
         if let cep = inputedCepTextField.text {
-            Task { try await requestCepData(cep) }
+            cancellable?.cancel()
+            cancellable = Task { [weak self] in
+                do {
+                    try await self?.requestCepData(cep)
+                } catch {
+                    await MainActor.run {
+                        let alert = UIAlertController(title: "Erro", message: "Não foi possível buscar o CEP. Tente novamente.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(alert, animated: true)
+                    }
+                }
+            }
             inputedCepTextField.text = ""
         }
     }

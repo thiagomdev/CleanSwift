@@ -8,7 +8,7 @@
 import Testing
 @testable import CleanArchitecture
 
-@Suite("MainViewController", .serialized)
+@Suite(.serialized)
 @MainActor
 final class MainViewControllerTests {
 
@@ -37,7 +37,8 @@ final class MainViewControllerTests {
 }
 
 extension MainViewControllerTests {
-    private func makeSut() -> (sut: MainViewController, interactorySpy: MainInteractorSpy) {
+    private
+    func makeSut() -> (sut: MainViewController, interactorySpy: MainInteractorSpy) {
         let interactorySpy = MainInteractorSpy()
         let sut = MainViewController(interactor: interactorySpy)
         return (sut, interactorySpy)

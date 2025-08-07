@@ -9,12 +9,9 @@ import Testing
 import Foundation
 @testable import CleanArchitecture
 
-@Suite("Network", .serialized)
-final class NetworkTests {
-    
-    private(set) var sutTracker: MemoryLeakTracker<Network>?
-    private(set) var mockTracker: MemoryLeakTracker<NetworkMock>?
-    
+@Suite(.serialized)
+final class NetworkTests: LeakTrackerSuite {
+
     @Test(arguments: [("00000000")])
     func fetch(cep: String) async throws {
         let (sut, mock) = makeSut()
@@ -76,22 +73,17 @@ final class NetworkTests {
             try await sut.fetchCep("00000000")
         }
     }
-    
-    deinit {
-        sutTracker?.verify()
-        mockTracker?.verify()
-    }
 }
 
 extension NetworkTests {
-    private func makeSut(file: String = #file, line: Int = #line, column: Int = #column) -> (sut: Network, mock: NetworkMock) {
+    private
+    func makeSut(source: SourceLocation = #_sourceLocation) -> (sut: Network, mock: NetworkMock) {
         let mock = NetworkMock()
         let sut = Network(session: mock)
         
-        let sourceLocation = SourceLocation(fileID: #fileID, filePath: file, line: line, column: column)
-        sutTracker = .init(instance: sut, sourceLocation: sourceLocation)
-        mockTracker = .init(instance: mock, sourceLocation: sourceLocation)
-        
+        track(sut, source: source)
+        track(mock, source: source)
+
         return (sut, mock)
     }
 }
