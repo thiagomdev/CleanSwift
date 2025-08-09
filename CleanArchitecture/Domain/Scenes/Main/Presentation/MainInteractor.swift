@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol MainInteracting {
     func load(data: String) async throws
@@ -23,8 +24,8 @@ final class MainInteractor {
 
 extension MainInteractor: MainInteracting {
     func load(data: String) async throws {
-        let response = try await worker.get(cep: data)
-        if let response {
+        let publisher = try await worker.get(cep: data)
+        for try await response in publisher.values {
             let cep = CepRequestModel.Response(cep: response)
             try await presenter.present(response: cep)
         }

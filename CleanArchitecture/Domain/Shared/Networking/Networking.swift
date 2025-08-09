@@ -5,6 +5,7 @@
 //  Created by Thiago Monteiro on 24/05/25.
 //
 
+import Combine
 import Foundation
 
 protocol URLSessionProtocol {
@@ -14,7 +15,7 @@ protocol URLSessionProtocol {
 extension URLSession: URLSessionProtocol {}
 
 protocol Networking {
-    func fetchCep(_ cep: String) async throws -> Cep?
+    func fetchCep(_ cep: String) async -> AnyPublisher<Cep, Error>
 }
 
 final class Network {
@@ -26,9 +27,14 @@ final class Network {
 }
 
 extension Network: Networking {
-    func fetchCep(_ cep: String) async throws -> Cep? {
-        guard let endpoint = URL(string: "https://viacep.com.br/ws/\(cep)/json/") else { return nil }
-        let (data, _) = try await session.data(from: endpoint)
-        return try JSONDecoder().decode(Cep.self, from: data)
+    func fetchCep(_ cep: String) async -> AnyPublisher<Cep, Error> {
+        guard let url = URL(string: "https://viacep.com.br/ws/\(cep)/json/") else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data }
+            .decode(type: Cep.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
 }

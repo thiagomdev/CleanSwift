@@ -110,11 +110,19 @@ final class MainViewController: UIViewController {
                         let alert = UIAlertController(title: "Erro", message: "Não foi possível buscar o CEP. Tente novamente.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
                         self?.present(alert, animated: true)
+                        self?.reset()
                     }
                 }
             }
-            inputedCepTextField.text = ""
+            inputedCepTextField.text = nil
         }
+    }
+    
+    private func reset() {
+        logradouroLabel.text = nil
+        estadoLabel.text = nil
+        bairro.text = nil
+        regiao.text = nil
     }
 }
 

@@ -5,10 +5,11 @@
 //  Created by Thiago Monteiro on 24/05/25.
 //
 
+import Combine
 import Foundation
 
 protocol MainWorking {
-    func get(cep: String) async throws -> Cep?
+    func get(cep: String) async throws -> AnyPublisher<Cep, Error>
 }
 
 final class MainWorker {
@@ -20,7 +21,7 @@ final class MainWorker {
 }
 
 extension MainWorker: MainWorking {
-    func get(cep: String) async throws -> Cep? {
-        try await networking.fetchCep(cep)
+    func get(cep: String) async throws -> AnyPublisher<Cep, Error> {
+        await networking.fetchCep(cep)
     }
 }
