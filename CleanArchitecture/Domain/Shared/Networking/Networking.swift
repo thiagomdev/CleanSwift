@@ -32,9 +32,10 @@ extension Network: Networking {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        let publisher = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: Cep.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
+        return publisher
     }
 }
