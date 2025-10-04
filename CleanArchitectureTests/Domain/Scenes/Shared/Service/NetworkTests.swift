@@ -10,7 +10,7 @@ import Foundation
 import Combine
 @testable import CleanArchitecture
 
-@Suite(.serialized)
+@Suite
 final class NetworkTests: LeakTrackerSuite {
 
     @Test(arguments: [("01150-011")])

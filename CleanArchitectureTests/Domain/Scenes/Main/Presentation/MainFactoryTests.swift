@@ -9,6 +9,7 @@ import Testing
 import UIKit
 @testable import CleanArchitecture
 
+@Suite
 @MainActor
 struct MainFactoryTests {
     private

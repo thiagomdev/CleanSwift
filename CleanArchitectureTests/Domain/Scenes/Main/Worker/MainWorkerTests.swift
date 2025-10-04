@@ -9,7 +9,7 @@ import Testing
 import Combine
 @testable import CleanArchitecture
 
-@Suite(.serialized)
+@Suite
 final class MainWorkerTests: LeakTrackerSuite {
 
     @Test(arguments: [("01150011")])

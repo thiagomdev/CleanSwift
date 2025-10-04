@@ -8,7 +8,7 @@
 import Testing
 @testable import CleanArchitecture
 
-@Suite(.serialized)
+@Suite
 @MainActor
 final class MainViewControllerTests {
 

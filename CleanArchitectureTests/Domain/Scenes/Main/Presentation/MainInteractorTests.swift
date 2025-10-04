@@ -8,7 +8,7 @@
 import Testing
 @testable import CleanArchitecture
 
-@Suite(.serialized)
+@Suite
 final class MainInteractorTests: LeakTrackerSuite {
     
     @Test(arguments: [("01150011")])
