@@ -6,6 +6,7 @@
 //
 
 import Testing
+import Combine
 @testable import CleanArchitecture
 
 @Suite(.serialized)
@@ -16,7 +17,8 @@ final class MainWorkerTests: LeakTrackerSuite {
         let (sut, networkingMock) = makeSut()
         networkingMock.expectedCep = .fixture(cep: cep)
         
-        let result = try await sut.get(cep: cep)
+        let publisher = try await sut.get(cep: cep)
+        let result = try await publisher.firstValue()
         
         let expectedCep = try #require(networkingMock.expectedCep)
         #expect(expectedCep == result)
@@ -38,5 +40,12 @@ extension MainWorkerTests {
         track(networkingMock, source: source)
 
         return (sut, networkingMock)
+    }
+}
+
+extension Publisher {
+    func firstValue() async throws -> Output {
+        for try await value in self.values { return value }
+        throw CancellationError()
     }
 }

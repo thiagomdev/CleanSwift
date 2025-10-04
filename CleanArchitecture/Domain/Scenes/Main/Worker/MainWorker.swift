@@ -12,7 +12,7 @@ protocol MainWorking {
     func get(cep: String) async throws -> AnyPublisher<Cep, Error>
 }
 
-final class MainWorker {
+actor MainWorker {
     private let networking: Networking
     
     init(networking: Networking) {

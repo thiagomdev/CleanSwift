@@ -11,6 +11,7 @@ protocol MainPresenting {
     func present(response: CepRequestModel.Response) async throws
 }
 
+@MainActor
 final class MainPresenter {
     weak var viewController: MainViewControllerDisplayableLogic?
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 enum MainFactory {
     static func make() -> UIViewController {
         let session = URLSession.shared

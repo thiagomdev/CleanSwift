@@ -133,12 +133,10 @@ extension MainViewController: MainViewControllerDisplayableLogic {
     }
     
     func displayCepData(_ viewModel: CepRequestModel.ViewModel) async throws {
-        await MainActor.run {
-            logradouroLabel.text = viewModel.perform(formatted: .logradouro)
-            estadoLabel.text = viewModel.perform(formatted: .estado)
-            bairro.text = viewModel.perform(formatted: .bairro)
-            regiao.text = viewModel.perform(formatted: .regiao)
-        }
+        logradouroLabel.text = viewModel.perform(formatted: .logradouro)
+        estadoLabel.text = viewModel.perform(formatted: .estado)
+        bairro.text = viewModel.perform(formatted: .bairro)
+        regiao.text = viewModel.perform(formatted: .regiao)
     }
 }
 

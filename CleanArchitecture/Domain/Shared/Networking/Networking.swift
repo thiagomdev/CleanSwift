@@ -18,7 +18,7 @@ protocol Networking {
     func fetchCep(_ cep: String) async -> AnyPublisher<Cep, Error>
 }
 
-final class Network {
+actor Network {
     private let session: URLSessionProtocol
     
     init(session: URLSessionProtocol) {
