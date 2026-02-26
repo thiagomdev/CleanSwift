@@ -22,6 +22,7 @@ final class MainViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.keyboardType = .numberPad
         textField.accessibilityIdentifier = "inputedCepTextField"
+        textField.isUserInteractionEnabled = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -32,6 +33,7 @@ final class MainViewController: UIViewController {
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = 8
         button.accessibilityIdentifier = "searchCepButton"
+        button.isUserInteractionEnabled = true
         button.addTarget(self, action: #selector(searchCep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -109,6 +111,7 @@ final class MainViewController: UIViewController {
                     await MainActor.run {
                         let alert = UIAlertController(title: "Erro", message: "Não foi possível buscar o CEP. Tente novamente.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        alert.view.accessibilityIdentifier = "errorAlertDialog"
                         self?.present(alert, animated: true)
                         self?.reset()
                     }
