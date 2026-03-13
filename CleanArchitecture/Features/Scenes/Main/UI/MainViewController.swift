@@ -87,6 +87,7 @@ final class MainViewController: UIViewController {
     init(interactor: MainInteracting) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        view.accessibilityIdentifier = "MainViewController"
     }
     
     required init?(coder: NSCoder) {
@@ -99,7 +100,9 @@ final class MainViewController: UIViewController {
         pin()
         extraSetup()
     }
-    
+}
+
+extension MainViewController {
     @objc
     private func searchCep() {
         if let cep = inputedCepTextField.text {
@@ -120,7 +123,9 @@ final class MainViewController: UIViewController {
             inputedCepTextField.text = nil
         }
     }
-    
+}
+
+extension MainViewController {
     private func reset() {
         logradouroLabel.text = nil
         estadoLabel.text = nil
@@ -142,7 +147,6 @@ extension MainViewController: MainViewControllerDisplayableLogic {
         regiao.text = viewModel.perform(formatted: .regiao)
     }
 }
-
 extension MainViewController {
     private func buildViews() {
         view.addSubview(inputedCepTextField)
@@ -153,7 +157,9 @@ extension MainViewController {
         stackViewContainer.addArrangedSubview(bairro)
         stackViewContainer.addArrangedSubview(regiao)
     }
-    
+}
+
+extension MainViewController {
     private func pin() {
         NSLayoutConstraint.activate([
             inputedCepTextField.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.5),
@@ -171,6 +177,10 @@ extension MainViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: stackViewContainer.trailingAnchor, multiplier: 1),
         ])
     }
+}
+
+extension MainViewController {
+    
     
     private func extraSetup() {
         view.backgroundColor = .systemBackground

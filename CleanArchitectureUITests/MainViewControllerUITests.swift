@@ -7,6 +7,7 @@
 
 import XCTest
 
+@MainActor
 final class MainViewControllerUITests: XCTestCase {
     
     func test_MainViewController_WhenViewLoadedUIElements_AreEnable() {
